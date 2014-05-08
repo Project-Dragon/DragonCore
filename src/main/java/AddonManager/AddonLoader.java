@@ -60,6 +60,7 @@ public class AddonLoader {
 			                dp = constructor.newInstance();
 			                dp.name = description.getName();
 			                DragonCore.plugin.registerCommands(commands, dp);
+			                System.out.println(dp.name);
 	                	  
 	      				dp.onLoad();
 
