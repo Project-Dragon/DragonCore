@@ -16,4 +16,20 @@
         </plugin>
   </plugins>
 </build>
+ <repositories>
+        <!-- Bukkit kann im folgenden Repository gefunden werden -->
+        <repository>
+          <id>bukkit-repo</id>
+          <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <dependencies>
+        <!-- Dependency information --> 
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <!-- Bukkit API Version, ändern, wenn nötig -->
+            <version>1.6.4-R2.0</version>
+        </dependency>
+    </dependencies>
 </project>
