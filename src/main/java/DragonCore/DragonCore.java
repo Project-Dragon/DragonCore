@@ -28,7 +28,6 @@ import AddonManager.AddonLoader;
 import AddonManager.DragonPlugin;
 import AddonManager.PluginCommandYamlParser;
 import AddonManager.PluginDescriptionFile;
-import DragonCore.Events.PlayerChatEvent;
 
 public class DragonCore extends JavaPlugin {
 	
@@ -41,7 +40,6 @@ public class DragonCore extends JavaPlugin {
 		plugin = this;
 		System.out.println("[INFO] Loading addons");
 		plugins = a.loadAddons();
-		Bukkit.getPluginManager().registerEvents(new PlayerChatEvent(), this);
 	}
 	
 	public void onDisable(){
@@ -133,9 +131,19 @@ public class DragonCore extends JavaPlugin {
 				 return true;
 			 }
 			 if(args[0].equalsIgnoreCase("reload")){
-				 if(sender.hasPermission("ds.reload")){
-					 this.onDisable();
-					 this.onEnable();
+				 if(sender.hasPermission("ds.reload")){	
+					 for(Command cmd1 : commandMap.keySet()){
+						unregisterCommand(cmd1.getName());
+					}
+					
+					for(DragonPlugin dp : plugins){
+						for(Listener l : dp.listener){
+							HandlerList.unregisterAll(l);
+						}
+					}
+					plugins.clear();
+					commandMap.clear();
+					plugins = a.loadAddons();
 					 sender.sendMessage("§aReloaded all addons");
 				 }
 			 }
