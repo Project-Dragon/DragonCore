@@ -27,7 +27,7 @@ final class PluginClassLoader extends URLClassLoader {
             try {
                 pluginClass = jarClass.asSubclass(DragonPlugin.class);
             } catch (ClassCastException ex) {
-                throw new InvalidPluginException("main class `" + main + "' does not extend JavaPlugin", ex);
+                throw new InvalidPluginException("main class `" + main + "' does not extend DragonAddon", ex);
             }
 
             plugin = pluginClass.newInstance();
